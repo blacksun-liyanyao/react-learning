@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="react-0.14.7/build/react.js"></script>
+    <script src="react-0.14.7/build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+    <style type="text/css">
+        .list{
+          list-style: none;
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+<div id="footer"></div>
+<div id="map"></div>
+<script type="text/babel">
+    var CommentForm = React.createClass({
+  render: function() {
+    return (
+      <div className="commentForm">
+        Hello, world! I am a CommentForm.
+      </div>
+    );
+  }
+});
+    var CommentList = React.createClass({
+  render: function() {
+    return (
+      <div className="commentList">
+        Hello, world! I am a CommentList.
+      </div>
+    );
+  }
+});
+    var InputType = React.createClass({
+      render:function(){
+        return (
+            <div className="InputType">
+            Hello,world! I am a InputType
+            </div>
+          );
+      }
+    });
+    
+    var CommentBox = React.createClass({
+  render: function() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+        <CommentList />
+        <CommentForm />
+        <InputType />
+      </div>
+    );
+  }
+});
+    ReactDOM.render(
+  <CommentBox />,
+  document.getElementById('content')
+);
+    var Comment = React.createClass({
+  render: function() {
+    return (
+      <div className="comment">
+        <h2 className="commentAuthor">
+          {this.props.author}
+        </h2>
+        {this.props.children}
+      </div>
+    );
+  }
+});
+    ReactDOM.render(
+  <Comment author='haha' children='hehe'/>,
+  document.getElementById('footer')
+);
+  var NotesList = React.createClass({
+  render: function() {
+    return (
+      <ul className="list">
+      {
+        React.Children.map(this.props.children, function (child) {
+          return <li>{child}</li>;
+        })
+      }
+      </ul>
+    );
+  }
+});
+
+ReactDOM.render(
+  <NotesList>
+    <span>hello</span>
+    <span>world</span>
+    <span>fantastic</span>
+  </NotesList>,
+  document.getElementById('map')
+);
+    </script>
+</body>
+</html>
